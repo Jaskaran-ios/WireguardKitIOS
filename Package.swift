@@ -1,32 +1,41 @@
 // swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
+
 import PackageDescription
 
 let package = Package(
     name: "WireguardKitIOS",
     platforms: [
-        .iOS(.v13) // Specify the minimum platform version
+        .macOS(.v12),
+        .iOS(.v15)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "WireguardKitIOS",
-            targets: ["WireguardKitIOS"]
-        ),
-       
+        .library(name: "WireguardKitIOS", targets: ["WireguardKitIOS"])
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "WireguardKitIOS",
+            dependencies: ["WireGuardKitGo", "WireGuardKitC"]
+        ),
+        .target(
+            name: "WireGuardKitC",
             dependencies: [],
-            path: "sources"
-
-            // List dependencies for this target if any
+            publicHeadersPath: "."
+        ),
+        .target(
+            name: "WireGuardKitGo",
+            dependencies: [],
+            exclude: [
+                "goruntime-boottime-over-monotonic.diff",
+                "go.mod",
+                "go.sum",
+                "api-apple.go",
+                "Makefile"
+            ],
+            publicHeadersPath: ".",
+            linkerSettings: [.linkedLibrary("wg-go")]
         )
-      
-    ],
-    swiftLanguageVersions: [.v5] // Specify supported Swift versions
+    ]
 )
