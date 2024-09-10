@@ -5,19 +5,29 @@ import PackageDescription
 
 let package = Package(
     name: "WireguardKitIOS",
+    platforms: [
+        .iOS(.v13) // Specify the minimum platform version
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "WireguardKitIOS",
-            targets: ["WireguardKitIOS"]),
+            targets: ["WireguardKitIOS"]
+        ),
+    ],
+    dependencies: [
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "WireguardKitIOS"),
+            name: "WireguardKitIOS",
+            dependencies: []
+            // List dependencies for this target if any
+        ),
         .testTarget(
             name: "WireguardKitIOSTests",
-            dependencies: ["WireguardKitIOS"]),
-    ]
+            dependencies: ["WireguardKitIOS"]
+            // Add any test dependencies here
+        ),
+    ],
+    swiftLanguageVersions: [.v5] // Specify supported Swift versions
 )
