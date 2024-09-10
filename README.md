@@ -1,6 +1,6 @@
-# [WireGuard](https://www.wireguard.com/) for iOS and macOS
+# WireGuard for iOS 
 
-This project contains an application for iOS and for macOS, as well as many components shared between the two of them. You may toggle between the two platforms by selecting the target from within Xcode.
+This project contains an application for iOS, as well as many components shared between the two of them. You may toggle between the two platforms by selecting the target from within Xcode.
 
 ## Building
 
