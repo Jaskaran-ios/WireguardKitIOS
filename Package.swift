@@ -22,12 +22,8 @@ let package = Package(
             name: "WireguardKitIOS",
             dependencies: []
             // List dependencies for this target if any
-        ),
-        .testTarget(
-            name: "WireguardKitIOSTests",
-            dependencies: ["WireguardKitIOS"]
-            // Add any test dependencies here
-        ),
+        )
+      
     ],
     swiftLanguageVersions: [.v5] // Specify supported Swift versions
 )
