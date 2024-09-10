@@ -185,7 +185,7 @@ class TunnelsManager {
         }
     }
 
-    private func addMultiple(tunnelConfigurations: ArraySlice<TunnelConfiguration>, numberSuccessful: UInt, lastError: TunnelsManagerError?, completionHandler: @escaping (UInt, TunnelsManagerError?) -> Void) {
+    public func addMultiple(tunnelConfigurations: ArraySlice<TunnelConfiguration>, numberSuccessful: UInt, lastError: TunnelsManagerError?, completionHandler: @escaping (UInt, TunnelsManagerError?) -> Void) {
         guard let head = tunnelConfigurations.first else {
             completionHandler(numberSuccessful, lastError)
             return
@@ -345,7 +345,7 @@ class TunnelsManager {
         }
     }
 
-    private func removeMultiple(tunnels: ArraySlice<TunnelContainer>, completionHandler: @escaping (TunnelsManagerError?) -> Void) {
+    public func removeMultiple(tunnels: ArraySlice<TunnelContainer>, completionHandler: @escaping (TunnelsManagerError?) -> Void) {
         guard let head = tunnels.first else {
             completionHandler(nil)
             return
@@ -484,7 +484,7 @@ class TunnelsManager {
         tunnels.forEach { $0.refreshStatus() }
     }
 
-    private func activateWaitingTunnelOnDeactivation(of tunnel: TunnelContainer) {
+    public func activateWaitingTunnelOnDeactivation(of tunnel: TunnelContainer) {
         waiteeObservationToken = tunnel.observe(\.status) { [weak self] tunnel, _ in
             guard let self = self else { return }
             if tunnel.status == .inactive {
@@ -496,7 +496,7 @@ class TunnelsManager {
         }
     }
 
-    private func startObservingTunnelStatuses() {
+    public func startObservingTunnelStatuses() {
         statusObservationToken = NotificationCenter.default.observe(name: .NEVPNStatusDidChange, object: nil, queue: OperationQueue.main) { [weak self] statusChangeNotification in
             guard let self = self,
                 let session = statusChangeNotification.object as? NETunnelProviderSession,
@@ -550,7 +550,7 @@ class TunnelsManager {
     }
 }
 
-private func lastErrorTextFromNetworkExtension(for tunnel: TunnelContainer) -> (title: String, message: String)? {
+public func lastErrorTextFromNetworkExtension(for tunnel: TunnelContainer) -> (title: String, message: String)? {
     guard let lastErrorFileURL = FileManager.networkExtensionLastErrorFileURL else { return nil }
     guard let lastErrorData = try? Data(contentsOf: lastErrorFileURL) else { return nil }
     guard let lastErrorStrings = String(data: lastErrorData, encoding: .utf8)?.splitToArray(separator: "\n") else { return nil }
@@ -725,7 +725,7 @@ class TunnelContainer: NSObject {
 }
 
 extension NETunnelProviderManager {
-    private static var cachedConfigKey: UInt8 = 0
+    public static var cachedConfigKey: UInt8 = 0
 
     var tunnelConfiguration: TunnelConfiguration? {
         if let cached = objc_getAssociatedObject(self, &NETunnelProviderManager.cachedConfigKey) as? TunnelConfiguration {

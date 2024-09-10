@@ -164,7 +164,7 @@ extension TunnelConfiguration {
         return output
     }
 
-    private static func collate(interfaceAttributes attributes: [String: String]) throws -> InterfaceConfiguration {
+    public static func collate(interfaceAttributes attributes: [String: String]) throws -> InterfaceConfiguration {
         guard let privateKeyString = attributes["privatekey"] else {
             throw ParseError.interfaceHasNoPrivateKey
         }
@@ -210,7 +210,7 @@ extension TunnelConfiguration {
         return interface
     }
 
-    private static func collate(peerAttributes attributes: [String: String]) throws -> PeerConfiguration {
+    public static func collate(peerAttributes attributes: [String: String]) throws -> PeerConfiguration {
         guard let publicKeyString = attributes["publickey"] else {
             throw ParseError.peerHasNoPublicKey
         }

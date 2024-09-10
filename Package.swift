@@ -14,6 +14,7 @@ let package = Package(
             name: "WireguardKitIOS",
             targets: ["WireguardKitIOS"]
         ),
+       
     ],
     dependencies: [
     ],

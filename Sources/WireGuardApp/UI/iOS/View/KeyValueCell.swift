@@ -73,7 +73,7 @@ class KeyValueCell: UITableViewCell {
 
     var observationToken: AnyObject?
 
-    private var textFieldValueOnBeginEditing: String = ""
+    public var textFieldValueOnBeginEditing: String = ""
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
