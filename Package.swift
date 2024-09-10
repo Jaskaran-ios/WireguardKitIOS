@@ -21,7 +21,9 @@ let package = Package(
     targets: [
         .target(
             name: "WireguardKitIOS",
-            dependencies: []
+            dependencies: [],
+            path: "sources"
+
             // List dependencies for this target if any
         )
       
